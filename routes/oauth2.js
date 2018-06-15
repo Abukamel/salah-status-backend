@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 const axios = require("axios");
 
@@ -9,14 +9,15 @@ const slack_client_secret = process.env.slack_client_secret;
 const slack_oauth_url = "https://slack.com/api/oauth.access";
 const redirect_uri =
   "https://angcnehdmhhhceijompnlichhojnkdco.chromiumapp.org/oauth";
-const redirect_uri_heroku = "https://slack-oauth-middleware.herokuapp.com/oauth2"
+const redirect_uri_heroku =
+  "https://slack-oauth-middleware.herokuapp.com/oauth2";
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get("/", function(req, res, next) {
   // When a user authorizes an app, a code query parameter is passed on the oAuth endpoint. If that code is not there, we respond with an error message
   if (!req.query.code) {
     res.status(500);
-    res.send({"Error": "Looks like we're not getting code."});
+    res.send({ Error: "Looks like we're not getting code." });
     console.log("Looks like we're not getting code.");
   } else {
     // If it's there...
@@ -27,9 +28,9 @@ router.get('/', function(req, res, next) {
         `${slack_oauth_url}?client_id=${slack_client_id}&client_secret=${slack_client_secret}&code=${slack_auth_code}&redirect_uri=${redirect_uri_heroku}`
       )
       .then(res => {
-        console.log(res.body);
+        console.log(res);
         if (res.body) {
-          axios.get(`${redirect_uri}?access_token=${res.body["access_token"]}`)
+          axios.get(`${redirect_uri}?access_token=${res.body["access_token"]}`);
         }
         return null;
       })
