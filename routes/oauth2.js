@@ -29,8 +29,16 @@ router.get("/", function(req, res, next) {
       )
       .then(res => {
         if (res.data) {
-          console.log(res.data)
-          axios.get(`${redirect_uri}?access_token=${res.data["access_token"]}&team_id=${res.data["team_id"]}&team_name=${res.data["team_name"]}`);
+          console.log(res.data);
+          axios
+            .get(
+              `${redirect_uri}?access_token=${
+                res.data["access_token"]
+              }&team_id=${res.data["team_id"]}&team_name=${
+                res.data["team_name"]
+              }`
+            )
+            .catch(e => console.log(e));
         }
         return null;
       })
