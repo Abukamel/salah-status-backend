@@ -9,6 +9,7 @@ const slack_client_secret = process.env.slack_client_secret;
 const slack_oauth_url = "https://slack.com/api/oauth.access";
 const redirect_uri =
   "https://angcnehdmhhhceijompnlichhojnkdco.chromiumapp.org/oauth";
+const redirect_uri_heroku = "https://slack-oauth-middleware.herokuapp.com/oauth2"
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -23,10 +24,10 @@ router.get('/', function(req, res, next) {
     const slack_auth_code = req.query.code;
     axios
       .get(
-        `${slack_oauth_url}?client_id=${slack_client_id}&client_secret=${slack_client_secret}&code=${slack_auth_code}`
+        `${slack_oauth_url}?client_id=${slack_client_id}&client_secret=${slack_client_secret}&code=${slack_auth_code}&redirect_uri=${redirect_uri_heroku}`
       )
       .then(res => {
-        console.log(res);
+        console.log(res.body);
         return null;
       })
       .catch(e => console.log(e));
