@@ -22,6 +22,7 @@ router.get("/", function(req, res, next) {
   } else {
     // If it's there...
     // We'll do a GET call to Slack's `oauth.access` endpoint, passing our app's client ID, client secret, and the code we just got as query parameters.
+    console.log(req);
     const slack_auth_code = req.query.code;
     axios
       .get(
