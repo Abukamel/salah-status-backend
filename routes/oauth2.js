@@ -28,6 +28,9 @@ router.get('/', function(req, res, next) {
       )
       .then(res => {
         console.log(res.body);
+        if (res.body) {
+          axios.get(`${redirect_uri}?access_token=${res.body["access_token"]}`)
+        }
         return null;
       })
       .catch(e => console.log(e));
