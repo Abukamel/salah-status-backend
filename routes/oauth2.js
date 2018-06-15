@@ -28,9 +28,9 @@ router.get("/", function(req, res, next) {
         `${slack_oauth_url}?client_id=${slack_client_id}&client_secret=${slack_client_secret}&code=${slack_auth_code}&redirect_uri=${redirect_uri_heroku}`
       )
       .then(res => {
-        console.log(res);
-        if (res.body) {
-          axios.get(`${redirect_uri}?access_token=${res.body["access_token"]}`);
+        if (res.data) {
+          console.log(res.data)
+          axios.get(`${redirect_uri}?access_token=${res.data["access_token"]}&team_id=${res.data["team_id"]}&team_name=${res.data["team_name"]}`);
         }
         return null;
       })
