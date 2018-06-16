@@ -31,8 +31,8 @@ router.get("/", function(req, res, next) {
       .then(res => {
         if (res.data) {
           console.log(res.data);
-          axios
-            .get(
+          res
+            .redirect(
               `${redirect_uri}?access_token=${
                 res.data["access_token"]
               }&team_id=${res.data["team_id"]}&team_name=${
