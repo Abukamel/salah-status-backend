@@ -28,15 +28,15 @@ router.get("/", function(req, res, next) {
       .get(
         `${slack_oauth_url}?client_id=${slack_client_id}&client_secret=${slack_client_secret}&code=${slack_auth_code}&redirect_uri=${redirect_uri_heroku}`
       )
-      .then(code_response => {
-        if (code_response.data) {
-          console.log(code_response.data);
+      .then(slack_response => {
+        if (slack_response.data) {
+          console.log(slack_response.data);
           res
             .redirect(
               `${redirect_uri}?access_token=${
-                res.data["access_token"]
-              }&team_id=${res.data["team_id"]}&team_name=${
-                res.data["team_name"]
+                slack_response.data["access_token"]
+              }&team_id=${slack_response.data["team_id"]}&team_name=${
+                slack_response.data["team_name"]
               }`
             )
             .catch(e => console.log(e));
