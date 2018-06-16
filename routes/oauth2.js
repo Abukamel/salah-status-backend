@@ -28,9 +28,9 @@ router.get("/", function(req, res, next) {
       .get(
         `${slack_oauth_url}?client_id=${slack_client_id}&client_secret=${slack_client_secret}&code=${slack_auth_code}&redirect_uri=${redirect_uri_heroku}`
       )
-      .then(res => {
-        if (res.data) {
-          console.log(res.data);
+      .then(code_response => {
+        if (code_response.data) {
+          console.log(code_response.data);
           res
             .redirect(
               `${redirect_uri}?access_token=${
