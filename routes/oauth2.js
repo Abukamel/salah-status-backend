@@ -4,8 +4,6 @@ const axios = require("axios");
 
 const slack_client_id = process.env.slack_client_id;
 const slack_client_secret = process.env.slack_client_secret;
-// const slack_scope = "dnd:write,users.profile:write";
-// const slack_authorize_url = "https://slack.com/oauth/authorize";
 const slack_oauth_url = "https://slack.com/api/oauth.access";
 const redirect_uri =
   "https://angcnehdmhhhceijompnlichhojnkdco.chromiumapp.org/oauth";
